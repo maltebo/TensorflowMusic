@@ -6,6 +6,10 @@ from preprocessing.helper import round_to_quarter
 
 
 class VanillaPart(m21.stream.Part):
+    """
+    works like a m21.stream.Part, but has some extra information and methods that might be needed/are needed
+    for analysis of musical pieces.
+    """
 
     def __init__(self):
         m21.stream.Part.__init__(self)

@@ -11,25 +11,24 @@ from settings.music_info_pb2 import Settings
 print("start variable setup")
 start_time = time.time()
 
-os.chdir("/home/malte/PycharmProjects/BachelorMusic")
+home_directory = "/home/malte/PycharmProjects/TensorflowMusic"
 
-# if not settings_dict:
-#     settings_dict = {
-#
-# Todo: update in setup file
-#
-#     }
-#
-#     try:
-#         with open(__SETTINGS_LOCATION, 'x') as fp:
-#             fp.write(json.dumps(settings_dict, indent=2))
-#     except:
-#         traceback.print_exc()
+os.chdir(home_directory)
 
-MXL_DATA_FOLDER = "/home/malte/PycharmProjects/BachelorMusic/data/MXL/lmd_matched_mxl"
+DATA_FOLDER = os.path.join(home_directory, "data")
+MXL_FOLDER = os.path.join(home_directory, "data/MXL")
+MXL_DATA_FOLDER = os.path.join(home_directory, "data/MXL/lmd_matched_mxl")
 
-MUSIC_INFO_FOLDER_PATH = "/home/malte/PycharmProjects/BachelorMusic/data/music_info_pb"
-MELODY_FILE_PATH = "/home/malte/PycharmProjects/BachelorMusic/data/melody_files/melody_info.json"
+MUSIC_INFO_FOLDER = os.path.join(home_directory, "data/music_info_pb")
+MELODY_FOLDER = os.path.join(home_directory, "data/melody_files")
+
+for folder in [DATA_FOLDER, MXL_FOLDER, MXL_DATA_FOLDER, MUSIC_INFO_FOLDER, MELODY_FOLDER]:
+    try:
+        os.mkdir(folder)
+    except FileExistsError:
+        pass
+
+MELODY_FILE_PATH = os.path.join(MELODY_FOLDER, "melody_info.json")
 
 UPDATE = True
 UPDATE_FREQUENCY = 30
@@ -71,7 +70,7 @@ melody_lock = threading.Lock()
 
 music_protocol_buffer = None
 
-for dirpath, _, filenames in os.walk(MUSIC_INFO_FOLDER_PATH):
+for dirpath, _, filenames in os.walk(MUSIC_INFO_FOLDER):
 
     for filename in filenames:
 
@@ -87,13 +86,7 @@ for dirpath, _, filenames in os.walk(MUSIC_INFO_FOLDER_PATH):
 
 existing_files = {}
 
-
-def make_music_list():
-    ml = music_info.MusicList(settings=music_settings, counter=0)
-    return ml
-
-
-PROTOCOL_BUFFER_LOCATION = os.path.join(MUSIC_INFO_FOLDER_PATH, settings_filename)
+PROTOCOL_BUFFER_LOCATION = os.path.join(MUSIC_INFO_FOLDER, settings_filename)
 
 mxl_work_queue = queue.Queue(0)
 mxl_files_done = 0
@@ -124,6 +117,12 @@ proto_buffer_start_time = mxl_start_time
 melodies_to_do = melody_work_queue.qsize()
 melodies_start_time = mxl_start_time
 
+
+def make_music_list():
+    ml = music_info.MusicList(settings=music_settings, counter=0)
+    return ml
+
+
 if not music_protocol_buffer:
 
     print("create music info file")
@@ -143,72 +142,5 @@ else:
 
 sequence_length = 30
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def make_chord_dict() -> dict:
-#     import music21 as m21
-#
-#     maj = m21.chord.Chord(['C', 'E', 'G'])
-#     min = m21.chord.Chord(['C', 'E-', 'G'])
-#     dim = m21.chord.Chord(['C', 'E-', 'G-'])
-#     maj7 = m21.chord.Chord(['C', 'E', 'G', 'B'])
-#     min7 = m21.chord.Chord(['C', 'E-', 'G', 'B-'])
-#
-#     base_note = m21.note.Note('C')
-#
-#     chord_dict = {}
-#
-#     for _ in range(12):
-#         chord_dict[base_note.name + " major"] = [p.ps % 12 for p in maj.pitches]
-#         maj = maj.transpose(1)
-#         chord_dict[base_note.name + " minor"] = [p.ps % 12 for p in min.pitches]
-#         min = min.transpose(1)
-#         chord_dict[base_note.name + " diminished"] = [p.ps % 12 for p in dim.pitches]
-#         dim = dim.transpose(1)
-#         chord_dict[base_note.name + " major 7"] = [p.ps % 12 for p in maj7.pitches]
-#         maj7 = maj7.transpose(1)
-#         chord_dict[base_note.name + " minor 7"] = [p.ps % 12 for p in min7.pitches]
-#         min7 = min7.transpose(1)
-#
-#         base_note = base_note.transpose(1)
-#
-#     note_dict = {}
-#     for i in range(12):
-#         note_dict[str(i)] = []
-#
-#     for key in chord_dict:
-#         for pitch in chord_dict[key]:
-#             note_dict[str(int(pitch))].append(key)
-#
-#     full_dict = {
-#         "note_to_chords": note_dict,
-#         "chord_to_notes": chord_dict
-#     }
-#
-#     with open(__CHORD_DATA_LOCATION, 'x') as fp:
-#         fp.write(json.dumps(full_dict, indent=2))
-#
-#     return full_dict
-#
-#
-# __CHORD_DATA_LOCATION = os.path.abspath("data/chord_data.json")
-# try:
-#     with open(__CHORD_DATA_LOCATION, 'r') as fp:
-#         chord_data = json.load(fp)
-# except FileNotFoundError:
-#     raise FileNotFoundError("no chord data found, please run the setup method") # Todo
 
 print("finished setup in {sec} seconds".format(sec=str(round(time.time() - start_time, 2))))

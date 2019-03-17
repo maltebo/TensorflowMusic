@@ -2,6 +2,7 @@ syntax = "proto2";
 
 package music_info;
 
+// protocol buffers used in this project are defined here
 
 enum ErrorEnum {
     WRONG_TIME_SIGNATURE = 0;

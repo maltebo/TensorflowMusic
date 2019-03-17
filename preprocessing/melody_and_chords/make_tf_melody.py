@@ -7,11 +7,17 @@ import threading
 import time
 import traceback
 
+import music_utils.simple_classes as simple
+import preprocessing.melody_and_chords.find_melody as find_melody
 import settings.constants as c
+import settings.music_info_pb2 as music_info
 
 
 class MakeDataThread(threading.Thread):
-
+    """
+    This Thread class is designed to make all the melody finding while communicating with other threads
+    via a queue specified in constants, that holds all filenames ready to be processed (.pb files)
+    """
     def __init__(self, thread_id=random.randint(100000, 999999)):
         threading.Thread.__init__(self)
         self.threadID = thread_id
@@ -33,20 +39,12 @@ class MakeDataThread(threading.Thread):
             return ""
 
     def make_melody_and_write_pb_file(self):
-        """
-        1. loads a file and creates a corresponding VanillaStream.
-        2. saves the file information in the global protocol buffer
-        3. saves a local pb file at the same place where the original
-           file was located, with .pb ending
-        :return:
-        """
+
         while not c.proto_buffer_work_queue.empty() and not self.exit_flag:
             filename = self.get_job()
 
             if not filename:
                 continue
-
-            print(filename)
 
             no_update = False
 
@@ -57,36 +55,35 @@ class MakeDataThread(threading.Thread):
                 if os.path.exists(new_filename):
                     continue
 
-                # with open(filename, 'rb') as fp:
-                #
-                #     proto_buffer = music_info.VanillaStreamPB()
-                #     proto_buffer.ParseFromString(fp.read())
-                #
-                # simple_song = simple.Song(proto_buffer=proto_buffer)
-                #
-                # melodies = find_melody.tf_skyline(simple_song, split=True)
-                #
-                # if melodies is None or len(melodies) == 0:
-                #     continue
-                #
-                # melody_list = music_info.MelodyList()
-                # melody_list.extra_info = "Doesn't save note volumes"
-                # melody_list.filepath = os.path.relpath(filename, c.MXL_DATA_FOLDER).replace('.pb', '.mxl')
-                # melody_list.algorithm = music_info.TF_SKYLINE
-                #
-                # for i, m in enumerate(melodies):
-                #
-                #     melody_part = melody_list.melodies.add()
-                #
-                #     melody_part.actual_start = m[0]
-                #
-                #     melody_part.offsets.extend([n.offset for n in m[1]])
-                #     melody_part.lengths.extend([n.length for n in m[1]])
-                #     melody_part.pitches.extend([n.pitch for n in m[1]])
-                #
-                # with open(new_filename, 'xb') as fp:
-                #
-                #     fp.write(melody_list.SerializeToString())
+                with open(filename, 'rb') as fp:
+
+                    proto_buffer = music_info.VanillaStreamPB()
+                    proto_buffer.ParseFromString(fp.read())
+
+                simple_song = simple.Song(proto_buffer=proto_buffer)
+
+                melodies = find_melody.tf_skyline(simple_song, split=True)
+
+                if melodies is None or len(melodies) == 0:
+                    continue
+
+                melody_list = music_info.MelodyList()
+                melody_list.extra_info = "Doesn't save note volumes"
+                melody_list.filepath = os.path.relpath(filename, c.MXL_DATA_FOLDER).replace('.pb', '.mxl')
+                melody_list.algorithm = music_info.TF_SKYLINE
+
+                for i, m in enumerate(melodies):
+                    melody_part = melody_list.melodies.add()
+
+                    melody_part.actual_start = m[0]
+
+                    melody_part.offsets.extend([n.offset for n in m[1]])
+                    melody_part.lengths.extend([n.length for n in m[1]])
+                    melody_part.pitches.extend([n.pitch for n in m[1]])
+
+                with open(new_filename, 'xb') as fp:
+
+                    fp.write(melody_list.SerializeToString())
 
             except:
                 print("\n\n\n", filename, "\n\n", sys.exc_info()[1], "\n\n", traceback.print_exc())

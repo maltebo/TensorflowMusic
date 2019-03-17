@@ -10,6 +10,10 @@ import settings.music_info_pb2 as music_info
 
 
 class NoteList(list):
+    """
+    a list extension with the upgrades of a predefined sort function and
+    the possibility to create a m21 Stream from it
+    """
 
     def __init__(self, seq=()):
         super().__init__(seq)
@@ -31,7 +35,10 @@ class NoteList(list):
 
 
 class Part:
-
+    """
+    a simple part representation which can be initialised with various values (see type hints)
+    smaller and faster than the m21 Implementation
+    """
     def __init__(self, id: int, proto_buffer: music_info.VanillaPartPB = None,
                  info: music_info.PieceOfMusic.Part = None,
                  note_list: NoteList = None, name: str = ""):
@@ -109,55 +116,55 @@ class Part:
         return str_result
 
 
-class Note(list):
-
+class Note:
+    # works like a list, and has 5 entries that can be called by properties
     def __init__(self, offset, length, pitch: 200, volume: 0, part: 2 ** 32):
-        super().__init__([offset, length, pitch, volume, part])
+        self._values = [offset, length, pitch, volume, part]
         self._m21_note = None
 
     @property
     def offset(self):
-        return self[0]
+        return self._values[0]
 
     @offset.setter
     def offset(self, value):
         assert value >= 0.0
-        self[0] = value
+        self._values[0] = value
 
     @property
     def length(self):
-        return self[1]
+        return self._values[1]
 
     @length.setter
     def length(self, value):
         assert value > 0.0
-        self[1] = value
+        self._values[1] = value
 
     @property
     def pitch(self):
-        return self[2]
+        return self._values[2]
 
     @pitch.setter
     def pitch(self, value):
         assert value >= 0
-        self[2] = value
+        self._values[2] = value
 
     @property
     def volume(self):
-        return self[3]
+        return self._values[3]
 
     @volume.setter
     def volume(self, value):
         assert value >= 0
-        self[3] = value
+        self._values[3] = value
 
     @property
     def part(self):
-        return self[4]
+        return self._values[4]
 
     @part.setter
     def part(self, value):
-        self[4] = value
+        self._values[4] = value
 
     def end(self):
         return self.offset + self.length
@@ -177,7 +184,10 @@ class Note(list):
 
 
 class Song:
-
+    """
+    a simple Song representation which can be initialised with various values (see type hints)
+    smaller and faster than the m21 (Stream) Implementation
+    """
     def __init__(self, proto_buffer: music_info.VanillaStreamPB = None, list_of_parts_or_note_lists: list = None,
                  name: str = ""):
 

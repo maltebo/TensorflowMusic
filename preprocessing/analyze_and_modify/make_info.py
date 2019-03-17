@@ -149,7 +149,12 @@ def save_vanilla_stream_pb(m21_stream: VanillaStream, info: music_info.PieceOfMu
 
 def _make_vanilla_stream_proto_buffer(m21_stream: VanillaStream,
                                       temp_info: music_info.PieceOfMusic) -> music_info.VanillaStreamPB:
-
+    """
+    makes a proto buffer file from a vanilla stream, that is small and fast :D
+    :param m21_stream:
+    :param temp_info:
+    :return:
+    """
     proto_buffer = music_info.VanillaStreamPB()
     proto_buffer.filepath = os.path.relpath(m21_stream.id, c.MXL_DATA_FOLDER)
 

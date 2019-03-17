@@ -2,13 +2,16 @@ import music21 as m21
 
 
 class VanillaStream(m21.stream.Score):
+    """
+    works like a m21.stream.Score, but has some extra methods that might be needed/are needed
+    for analysis of musical pieces.
+    """
 
     def __init__(self, filename=None):
         m21.stream.Stream.__init__(self)
         if filename:
             self.id = filename
         self.time_signature = None
-        # we want to adjust the times so that one beat is approx. 0.5 seconds - 120bpm
         self.min_metronome = None
         self.max_metronome = None
         self.key = None

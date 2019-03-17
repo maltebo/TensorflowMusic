@@ -18,6 +18,11 @@ from preprocessing.helper import FileNotFittingSettingsError
 
 
 class MakeDataThread(threading.Thread):
+    """
+    This Thread class is designed to make all the preprocessing while communicating with other threads
+    via a queue specified in constants, that holds all filenames ready to be processed
+    """
+
     def __init__(self, thread_id=random.randint(100000, 999999)):
         threading.Thread.__init__(self)
         self.threadID = thread_id
@@ -133,6 +138,9 @@ class MakeDataThread(threading.Thread):
 
                     seconds_left = str(round(full_seconds_left % 60))
 
+                    # print information about the probable time left until every file is processed
+                    # highly annoying since its not actually decreasing a lot, as one can easily imagine :D
+                    # I've seen 4d for a while now so I'm really thinking about deleting the feature again :P
                     print("\rFinished {do:>5}/{todo}, {p:>7.3f} percent of the files, Time left: {d:>2}d, {h:>2}h, "
                           "{m:>2}min, {s:>2}s     ".format(
                         do=str(c.mxl_files_done), todo=str(c.mxl_files_to_do),
