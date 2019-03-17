@@ -70,14 +70,14 @@ model.compile(loss={'pitch_output': 'categorical_crossentropy',
               optimizer=Adam())
 
 ########################################################
-number_of_melodies_to_generate = 1
-notes_per_melody = 100
+number_of_melodies_to_generate = 10
+notes_per_melody = 50
 
-headache = [(71.0, 1.0, 0.0), (76.0, 1.0, 1.0), (69.0, 2.0, 2.0), (74.0, 0.5, 4.0),
-            (69.0, 0.5, 4.5), (72.0, 3.0, 5.0), (71.0, 2.0, 8.0), (64.0, 2.0, 10.0)]
+# headache = [(71.0, 1.0, 0.0), (76.0, 1.0, 1.0), (69.0, 2.0, 2.0), (74.0, 0.5, 4.0),
+#             (69.0, 0.5, 4.5), (72.0, 3.0, 5.0), (71.0, 2.0, 8.0), (64.0, 2.0, 10.0)]
 
-# start_sequence = [(60, 1.0, 0.0)]
-start_sequence = headache
+start_sequence = [(60, 1.0, 0.0)]
+# start_sequence = headache
 
 for melody_nr in range(number_of_melodies_to_generate):
 

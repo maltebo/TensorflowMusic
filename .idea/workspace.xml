@@ -35,8 +35,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/generate_from_tf_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="127">
+              <caret line="69" column="31" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
               <folding>
                 <element signature="e#211#220#0" expanded="true" />
               </folding>
@@ -97,9 +97,9 @@
         <option value="$PROJECT_DIR$/model/generate_tf_model.py" />
         <option value="$PROJECT_DIR$/settings/constants.py" />
         <option value="$PROJECT_DIR$/preprocessing/analyze_and_modify/make_data_from_mxl_archive.py" />
-        <option value="$PROJECT_DIR$/model/generate_from_tf_model.py" />
         <option value="$PROJECT_DIR$/model/tf_model.py" />
         <option value="$PROJECT_DIR$/preprocessing/melody_and_chords/make_tf_melody.py" />
+        <option value="$PROJECT_DIR$/model/generate_from_tf_model.py" />
       </list>
     </option>
   </component>
@@ -414,7 +414,7 @@
       <option name="presentableId" value="Default" />
       <updated>1552842654055</updated>
       <workItem from="1552842655291" duration="10911000" />
-      <workItem from="1552855123740" duration="2193000" />
+      <workItem from="1552855123740" duration="3477000" />
     </task>
     <task id="LOCAL-00001" summary="Added all relevant information and deleted unnecessary files">
       <created>1552852195231</created>
@@ -427,13 +427,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13104000" />
+    <option name="totallyTimeSpent" value="14388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31654677" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31654677" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -447,9 +447,9 @@
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.4991699" weight="0.32937366" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5002767" side_tool="true" weight="0.32937366" />
-      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.4986165" weight="0.46328294" />
+      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.4986165" weight="0.28509718" />
       <window_info anchor="bottom" id="Terminal" order="12" />
-      <window_info anchor="bottom" id="Python Console" order="13" sideWeight="0.4997233" visible="true" weight="0.4352052" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="13" sideWeight="0.4997233" visible="true" weight="0.4352052" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -460,6 +460,32 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
@@ -608,8 +634,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/generate_from_tf_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="127">
+          <caret line="69" column="31" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
           <folding>
             <element signature="e#211#220#0" expanded="true" />
           </folding>
