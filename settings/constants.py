@@ -20,18 +20,15 @@ MXL_FOLDER = os.path.join(home_directory, "data/MXL")
 MXL_DATA_FOLDER = os.path.join(home_directory, "data/MXL/lmd_matched_mxl")
 
 MUSIC_INFO_FOLDER = os.path.join(home_directory, "data/music_info_pb")
-MELODY_FOLDER = os.path.join(home_directory, "data/melody_files")
 
-for folder in [DATA_FOLDER, MXL_FOLDER, MXL_DATA_FOLDER, MUSIC_INFO_FOLDER, MELODY_FOLDER]:
+for folder in [DATA_FOLDER, MXL_FOLDER, MXL_DATA_FOLDER, MUSIC_INFO_FOLDER]:
     try:
         os.mkdir(folder)
     except FileExistsError:
         pass
 
-MELODY_FILE_PATH = os.path.join(MELODY_FOLDER, "melody_info.json")
-
 UPDATE = True
-UPDATE_FREQUENCY = 30
+UPDATE_FREQUENCY = 10
 
 DRAFT = False
 

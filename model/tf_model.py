@@ -55,4 +55,4 @@ callbacks_list = [checkpoint]
 
 # fit the model with specified number of epochs and a split of test and validation data
 model.fit([pitch_in, length_in, offset_in], [pitch_out, length_out],
-          epochs=50, batch_size=32, callbacks=callbacks_list, validation_split=0.2)
+          epochs=20, batch_size=10, callbacks=callbacks_list, validation_split=0.2)

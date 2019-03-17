@@ -24,10 +24,10 @@ def make_tf_data(settings=c.music_settings):
 
     min_sequence_length = c.sequence_length + 1  # number of min beats per melody
 
-    # while not c.melody_work_queue.empty():
+    while not c.melody_work_queue.empty():
     # how many of the songs created do you want to use for training?
     # all is too much for my computer :D
-    for i in range(100):
+    # for i in range(100):
 
         melody = c.melody_work_queue.get()
 

@@ -87,15 +87,6 @@ class MakeDataThread(threading.Thread):
 
                 save_vanilla_stream_pb(m21_stream, piece_of_music_pb)
 
-                # in the skyline algorithm it is asserted that the melody is a sequence
-                # melody_stream = simple_skyline_algorithm(m21_stream)
-                #
-                # melody_struct = get_tf_structure(melody_stream)
-                # save_melody_struct(filename, melody_struct)
-
-                # melody_stream.show('midi')
-
-                # full_stream = find_chords(m21_stream, melody_stream)
             except FileNotFittingSettingsError:
                 if valid:
                     make_invalid_in_protocol_buffer(filename, str(sys.exc_info()[1]))
@@ -170,5 +161,15 @@ if __name__ == "__main__":
         t.join()
 
     print("\n\n\nExiting all {n} Threads".format(n=thread_number))
+
+    c.music_protocol_buffer.counter = 0
+    serialized_byte_stream = c.music_protocol_buffer.SerializeToString()
+
+    c.music_info_file_lock.acquire()
+    print("\rcurrently writing protocol buffer\t\t\t\t\t", file=sys.stderr, end='', flush=True)
+    with open(c.PROTOCOL_BUFFER_LOCATION, 'wb') as fp:
+        fp.write(serialized_byte_stream)
+    print("\rfinished writing protocol buffer \t\t\t\t\t", file=sys.stderr, end='', flush=True)
+    c.music_info_file_lock.release()
 
     sys.exit(0)

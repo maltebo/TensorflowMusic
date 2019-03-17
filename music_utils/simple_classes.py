@@ -88,7 +88,7 @@ class Part:
 
     def notes(self, exclude_rests=False):
         if exclude_rests:
-            return [note for note in self._notes if 0 <= note[2] <= 128]
+            return [note for note in self._notes if 0 <= note.pitch <= 128]
         return deepcopy(self._notes)
 
     @property

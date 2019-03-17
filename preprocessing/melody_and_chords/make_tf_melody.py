@@ -53,6 +53,7 @@ class MakeDataThread(threading.Thread):
                 new_filename = filename.replace('.pb', '_tf_skyline.melody_pb')
 
                 if os.path.exists(new_filename):
+                    no_update = True
                     continue
 
                 with open(filename, 'rb') as fp:
